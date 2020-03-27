@@ -31,3 +31,9 @@
     state: started
   tags:
     - node_exporter_run
+
+- import_tasks: textfiles.yml
+  become: true
+  tags:
+    - textfile_scripts
+  when: node_exporter_textfile_deploy

@@ -1,0 +1,30 @@
+---
+- name: Create textfile script directory
+  file:
+    path: "{{ _node_exporter_binary_install_dir }}/textfile_scripts"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Deploy textfile scripts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ _node_exporter_binary_install_dir }}/textfile_scripts/"
+    mode: 0755
+    owner: root
+    group: root
+  with_fileglob: "files/*"
+
+- name: Enable cron for update-check scripts
+  cron:
+    name: textfile_updates
+    job: "{{ _node_exporter_binary_install_dir }}/textfile_scripts/{{ ansible_pkg_mgr }}.sh > {{ node_exporter_textfile_dir }}/updates.prom"
+    cron_file: node-exp_updates
+    user: root
+    state: present
+    hour: "0,6,12,18"
+    minute: "22"
+
+
+

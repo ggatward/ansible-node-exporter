@@ -4,7 +4,7 @@ node_exporter_binary_local_dir: ""
 node_exporter_web_listen_address: "0.0.0.0:9100"
 
 node_exporter_textfile_dir: "/var/lib/node_exporter"
-node_exporter_textfile_deploy: false
+node_exporter_textfile_deploy: true
 node_exporter_textfile_enable: []
 
 node_exporter_enabled_collectors:

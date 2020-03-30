@@ -40,7 +40,8 @@ fi
 
 echo '# HELP node_reboot_required Node reboot is required for software updates.'
 echo '# TYPE node_reboot_required gauge'
-if [ $(/usr/bin/needs-restarting -r | echo $?) -ne 0 ] ; then
+/usr/bin/needs-restarting -r >/dev/null
+if [ $? -ne 0 ] ; then
   echo 'node_reboot_required 1'
 else
   echo 'node_reboot_required 0'
